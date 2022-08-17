@@ -77,21 +77,22 @@ class generative_label:
         
 
 if __name__ == '__main__':
-    start = input("從幾號開始: ")
-    with open("spam_data_2.csv", newline='', encoding = 'utf-8') as csvfile:
+    start = eval(input("從幾號開始: "))
+    with open("list_classifier_error_4.csv", newline='', encoding = 'utf-8') as csvfile:
         rows = csv.reader(csvfile, delimiter=',')
 
         for row in rows:
-            # if(row[0] != str(start)):
-            #     pass
-            # else:
+            if(row[0] != str(start)):
+                print(row[0],"<<<<<<<<<",start)
+                pass
+            else:
                 email_id = row[0]
-                cls_label = row[2]
-                text = row[3]
+                cls_label = row[4]
+                text = row[5]
                 gen_label = generative_label(text)
                 print(gen_label.word_split())
                 
-                if(row[2] == "EDM"):
+                if(row[4] == "EDM"):
                     gen_label.display()
                     gen_label.assign_number()
                 gen_label.create_output_list(email_id = email_id, cls_label = cls_label)
